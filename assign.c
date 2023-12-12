@@ -11,7 +11,7 @@
 /**********************************************************************************************************************
  *  MACRO
  *********************************************************************************************************************/
-#define     SCHDULING_POLICY    SCHED_RR   // options are CHED_FIFO,  SCHED_RR,  andSCHED_OTHER
+#define     SCHDULING_POLICY    SCHED_RR   // options are SCHED_FIFO, SCHED_RR and SCHED_OTHER
 /**********************************************************************************************************************
  *  Includes
  *********************************************************************************************************************/
@@ -52,8 +52,13 @@ int main(int argc, char **argv)
     CPU_SET(1,&cpu_set_1);
     /* Set CPU affinity attribute in thread attributes object*/
     pthread_attr_setaffinity_np(&thread1_attr,sizeof(cpu_set_t),&cpu_set_1);
+    #if(SCHDULING_POLICY == SCHED_FIFO)
     /* Set schduling priority parameter variable*/
     scheduling_parameters1.sched_priority = 3;
+    #elif (SCHDULING_POLICY == SCHED_RR)
+    /* Set schduling priority parameter variable*/
+    scheduling_parameters1.sched_priority = 3;
+    #endif
     /* Set schduling priority parameter*/
     pthread_attr_setschedparam(&thread1_attr, &scheduling_parameters1);
 
@@ -70,8 +75,13 @@ int main(int argc, char **argv)
     CPU_SET(1,&cpu_set_2);
     /* Set CPU affinity attribute in thread attributes object*/
     pthread_attr_setaffinity_np(&thread2_attr,sizeof(cpu_set_t),&cpu_set_2);
+    #if(SCHDULING_POLICY == SCHED_FIFO)
+    /* Set schduling priority parameter variable*/
+    scheduling_parameters2.sched_priority = 2;
+    #elif (SCHDULING_POLICY == SCHED_RR)
     /* Set schduling priority parameter variable*/
     scheduling_parameters2.sched_priority = 3;
+    #endif
     /* Set schduling priority parameter*/
     pthread_attr_setschedparam(&thread2_attr, &scheduling_parameters2);
 
@@ -88,8 +98,13 @@ int main(int argc, char **argv)
     CPU_SET(1,&cpu_set_3);
     /* Set CPU affinity attribute in thread attributes object*/
     pthread_attr_setaffinity_np(&thread3_attr,sizeof(cpu_set_t),&cpu_set_3);
+    #if(SCHDULING_POLICY == SCHED_FIFO)
+    /* Set schduling priority parameter variable*/
+    scheduling_parameters3.sched_priority = 1;
+    #elif (SCHDULING_POLICY == SCHED_RR)
     /* Set schduling priority parameter variable*/
     scheduling_parameters3.sched_priority = 3;
+    #endif
     /* Set schduling priority parameter*/
     pthread_attr_setschedparam(&thread3_attr, &scheduling_parameters3);
 
