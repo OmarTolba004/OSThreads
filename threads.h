@@ -24,7 +24,7 @@
 void * thread_100ms(void * args);
 
 /*******************************************************************************
- * Service Name: thread_100ms
+ * Service Name: thread_200ms
  * Parameters (in):  args - void *
  * Parameters (inout): None
  * Parameters (out): None
@@ -34,7 +34,7 @@ void * thread_100ms(void * args);
 void * thread_200ms(void * args);
 
 /*******************************************************************************
- * Service Name: thread_100ms
+ * Service Name: thread_300ms
  * Parameters (in):  args - void *
  * Parameters (inout): None
  * Parameters (out): None

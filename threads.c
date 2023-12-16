@@ -27,8 +27,8 @@ static int timespec_cmp(struct timespec *a, struct timespec *b);
  *  Static (private) Vars
  *********************************************************************************************************************/
 /* Variables controls Thread cpu utilization*/
-static int n1 = 5e3;
-static int n2 = 2e4;
+static int n1 = 32180;
+static int n2 = 2e3;
 
 /**********************************************************************************************************************
  *  Threads implemntations
@@ -55,35 +55,33 @@ void *thread_100ms(void *args)
     clock_gettime(CLOCK_MONOTONIC, &next_wakeup_time);
 
     for (;;)
-    { 
-        /* Add period time to the next_wakeup_time var
-         * Note: I did calculate next time before executing code to have exactly periodic tasks
-         */
+    {
+        /* Add period time to the next_wakeup_time var */
         timespec_add_us(&next_wakeup_time, thread_period_us);
-        /* Thread returned from sleep, So lets check if it did miss it's deadline
-         * note: First time executing the thread that won't be the case and the check of messing deadline would be reduntant
-         */
+
+        /* Thread main code*/
+        /* Simulating thread CPU utilization*/
+        for (i = 0; i < n1; i++)
+        {
+            for (j = 0; j < n2; j++)
+                a = j / 2;
+        }
+
+        /* Checking Deadline violating criteria*/
         clock_gettime(CLOCK_MONOTONIC, &current_time);
-        if((current_time.tv_sec > next_wakeup_time.tv_sec) || (current_time.tv_sec == next_wakeup_time.tv_sec && current_time.tv_nsec > next_wakeup_time.tv_nsec))
+        if ((current_time.tv_sec > next_wakeup_time.tv_sec) || (current_time.tv_sec == next_wakeup_time.tv_sec && current_time.tv_nsec > next_wakeup_time.tv_nsec))
         {
             /* Deadline missed*/
-            printf("100ms preiodic thread deadline is missed\n");
-        }else 
+            printf("100ms periodic thread deadline is missed\n");
+        }
+        else
         {
             printf("100ms periodic thread deadline is met\n");
         }
 
-        /* Thread main code*/
-        /* Simulating thread CPU utilization*/
-        for(i =0; i<n1;i++)
-        {
-            for(j=0;j<n2;j++) a=j/2;
-        }
-
-
         /* Making the thread enter sleep state for absloute time defined in next_wakeup_time var*/
-        if(clock_nanosleep(CLOCK_MONOTONIC, TIMER_ABSTIME, &next_wakeup_time, NULL)!= 0)
-        {   /* error occured*/
+        if (clock_nanosleep(CLOCK_MONOTONIC, TIMER_ABSTIME, &next_wakeup_time, NULL) != 0)
+        { /* error occured*/
             printf("error while executing clock_nanosleep() syscall\n");
         }
     }
@@ -96,7 +94,7 @@ void *thread_100ms(void *args)
  * Parameters (inout): None
  * Parameters (out): None
  * Return value: void *
- * Description: 2000ms periodic thread
+ * Description: 200ms periodic thread
  *******************************************************************************/
 void *thread_200ms(void *args)
 {
@@ -112,35 +110,33 @@ void *thread_200ms(void *args)
     clock_gettime(CLOCK_MONOTONIC, &next_wakeup_time);
 
     for (;;)
-    { 
-        /* Add period time to the next_wakeup_time var
-         * Note: I did calculate next time before executing code to have exactly periodic tasks
-         */
+    {
+        /* Add period time to the next_wakeup_time var */
         timespec_add_us(&next_wakeup_time, thread_period_us);
-        /* Thread returned from sleep, So lets check if it did miss it's deadline
-         * note: First time executing the thread that won't be the case and the check of messing deadline would be reduntant
-         */
+
+        /* Thread main code*/
+        /* Simulating thread CPU utilization*/
+        for (i = 0; i < n1; i++)
+        {
+            for (j = 0; j < n2; j++)
+                a = j / 2;
+        }
+
+        /* Checking Deadline violating criteria*/
         clock_gettime(CLOCK_MONOTONIC, &current_time);
-        if((current_time.tv_sec > next_wakeup_time.tv_sec) || (current_time.tv_sec == next_wakeup_time.tv_sec && current_time.tv_nsec > next_wakeup_time.tv_nsec))
+        if ((current_time.tv_sec > next_wakeup_time.tv_sec) || (current_time.tv_sec == next_wakeup_time.tv_sec && current_time.tv_nsec > next_wakeup_time.tv_nsec))
         {
             /* Deadline missed*/
-            printf("200ms preiodic thread deadline is missed\n");
-        }else 
+            printf("200ms periodic thread deadline is missed\n");
+        }
+        else
         {
             printf("200ms periodic thread deadline is met\n");
         }
 
-        /* Thread main code*/
-        /* Simulating thread CPU utilization*/
-        for(i =0; i<n1;i++)
-        {
-            for(j=0;j<n2;j++) a=j/2;
-        }
-
-
         /* Making the thread enter sleep state for absloute time defined in next_wakeup_time var*/
-        if(clock_nanosleep(CLOCK_MONOTONIC, TIMER_ABSTIME, &next_wakeup_time, NULL)!= 0)
-        {   /* error occured*/
+        if (clock_nanosleep(CLOCK_MONOTONIC, TIMER_ABSTIME, &next_wakeup_time, NULL) != 0)
+        { /* error occured*/
             printf("error while executing clock_nanosleep() syscall\n");
         }
     }
@@ -169,35 +165,33 @@ void *thread_300ms(void *args)
     clock_gettime(CLOCK_MONOTONIC, &next_wakeup_time);
 
     for (;;)
-    { 
-        /* Add period time to the next_wakeup_time var
-         * Note: I did calculate next time before executing code to have exactly periodic tasks
-         */
+    {
+        /* Add period time to the next_wakeup_time var */
         timespec_add_us(&next_wakeup_time, thread_period_us);
-        /* Thread returned from sleep, So lets check if it did miss it's deadline
-         * note: First time executing the thread that won't be the case and the check of messing deadline would be reduntant
-         */
+
+        /* Thread main code*/
+        /* Simulating thread CPU utilization*/
+        for (i = 0; i < n1; i++)
+        {
+            for (j = 0; j < n2; j++)
+                a = j / 2;
+        }
+
+        /* Checking Deadline violating criteria*/
         clock_gettime(CLOCK_MONOTONIC, &current_time);
-        if((current_time.tv_sec > next_wakeup_time.tv_sec) || (current_time.tv_sec == next_wakeup_time.tv_sec && current_time.tv_nsec > next_wakeup_time.tv_nsec))
+        if ((current_time.tv_sec > next_wakeup_time.tv_sec) || (current_time.tv_sec == next_wakeup_time.tv_sec && current_time.tv_nsec > next_wakeup_time.tv_nsec))
         {
             /* Deadline missed*/
-            printf("300ms preiodic thread deadline is missed\n");
-        }else 
+            printf("300ms periodic thread deadline is missed\n");
+        }
+        else
         {
             printf("300ms periodic thread deadline is met\n");
         }
 
-        /* Thread main code*/
-        /* Simulating thread CPU utilization*/
-        for(i =0; i<n1;i++)
-        {
-            for(j=0;j<n2;j++) a=j/2;
-        }
-
-
         /* Making the thread enter sleep state for absloute time defined in next_wakeup_time var*/
-        if(clock_nanosleep(CLOCK_MONOTONIC, TIMER_ABSTIME, &next_wakeup_time, NULL)!= 0)
-        {   /* error occured*/
+        if (clock_nanosleep(CLOCK_MONOTONIC, TIMER_ABSTIME, &next_wakeup_time, NULL) != 0)
+        { /* error occured*/
             printf("error while executing clock_nanosleep() syscall\n");
         }
     }

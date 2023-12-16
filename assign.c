@@ -11,7 +11,7 @@
 /**********************************************************************************************************************
  *  MACRO
  *********************************************************************************************************************/
-#define     SCHDULING_POLICY    SCHED_RR   // options are SCHED_FIFO, SCHED_RR and SCHED_OTHER
+#define     SCHDULING_POLICY    SCHED_OTHER   // options are SCHED_FIFO, SCHED_RR and SCHED_OTHER
 /**********************************************************************************************************************
  *  Includes
  *********************************************************************************************************************/
@@ -58,6 +58,13 @@ int main(int argc, char **argv)
     #elif (SCHDULING_POLICY == SCHED_RR)
     /* Set schduling priority parameter variable*/
     scheduling_parameters1.sched_priority = 3;
+    #elif (SCHDULING_POLICY == SCHED_OTHER)
+    /* Set schduling priority parameter variable
+     *  Note : For threads scheduled under  one  of  the  normal  scheduling  policies
+     *  (SCHED_OTHER,  SCHED_IDLE,  SCHED_BATCH), sched_priority is not used in
+     * scheduling decisions (it must be specified as 0).
+     */
+    scheduling_parameters1.sched_priority = 0;
     #endif
     /* Set schduling priority parameter*/
     pthread_attr_setschedparam(&thread1_attr, &scheduling_parameters1);
@@ -81,6 +88,13 @@ int main(int argc, char **argv)
     #elif (SCHDULING_POLICY == SCHED_RR)
     /* Set schduling priority parameter variable*/
     scheduling_parameters2.sched_priority = 3;
+    #elif (SCHDULING_POLICY == SCHED_OTHER)
+    /* Set schduling priority parameter variable
+     *  Note : For threads scheduled under  one  of  the  normal  scheduling  policies
+     *  (SCHED_OTHER,  SCHED_IDLE,  SCHED_BATCH), sched_priority is not used in
+     * scheduling decisions (it must be specified as 0).
+     */
+    scheduling_parameters2.sched_priority = 0;
     #endif
     /* Set schduling priority parameter*/
     pthread_attr_setschedparam(&thread2_attr, &scheduling_parameters2);
@@ -104,6 +118,13 @@ int main(int argc, char **argv)
     #elif (SCHDULING_POLICY == SCHED_RR)
     /* Set schduling priority parameter variable*/
     scheduling_parameters3.sched_priority = 3;
+    #elif (SCHDULING_POLICY == SCHED_OTHER)
+    /* Set schduling priority parameter variable
+     *  Note : For threads scheduled under  one  of  the  normal  scheduling  policies
+     *  (SCHED_OTHER,  SCHED_IDLE,  SCHED_BATCH), sched_priority is not used in
+     * scheduling decisions (it must be specified as 0).
+     */
+    scheduling_parameters3.sched_priority = 0;
     #endif
     /* Set schduling priority parameter*/
     pthread_attr_setschedparam(&thread3_attr, &scheduling_parameters3);
